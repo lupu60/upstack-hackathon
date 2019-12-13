@@ -2,9 +2,11 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  template: `
+    <ngx-loading-bar [includeSpinner]="false"></ngx-loading-bar>
+    <router-outlet></router-outlet>
+  `
 })
 export class AppComponent {
-  isCollapsed = false;
+  messages: any;
 }
