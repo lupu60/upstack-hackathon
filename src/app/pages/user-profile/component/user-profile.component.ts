@@ -7,8 +7,10 @@ import { generateAvatar } from '../../../shared/generateAvatar';
 })
 export class UserProfileComponent implements OnInit {
   constructor() {}
+  loading = true;
   userProfilePicture;
   ngOnInit() {
     this.userProfilePicture = generateAvatar();
+    this.loading = false;
   }
 }

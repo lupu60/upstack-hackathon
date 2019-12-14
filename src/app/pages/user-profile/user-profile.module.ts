@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { UserProfileRoutingModule } from './user-profile-routing.module';
 import { UserProfileComponent } from './component/user-profile.component';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzAvatarModule } from 'ng-zorro-antd/avatar';
@@ -11,14 +10,7 @@ import { NzSwitchModule } from 'ng-zorro-antd/switch';
 
 @NgModule({
   declarations: [UserProfileComponent],
-  imports: [
-    CommonModule,
-    NzCardModule,
-    NzIconModule,
-    NzSwitchModule,
-    NzSkeletonModule,
-    NzAvatarModule,
-    UserProfileRoutingModule
-  ]
+  imports: [CommonModule, NzCardModule, NzIconModule, NzSwitchModule, NzSkeletonModule, NzAvatarModule],
+  exports: [UserProfileComponent]
 })
 export class UserProfileModule {}

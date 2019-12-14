@@ -39,6 +39,5 @@ export class LayoutComponent {
 
   tabBarTabOnPress(pressParam: any) {
     this.selectedIndex = pressParam.index;
-    this.router.navigate([pressParam.key]);
   }
 }
