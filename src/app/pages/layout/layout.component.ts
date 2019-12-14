@@ -7,12 +7,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent {
-  hidden: boolean = false;
-  topFlag: boolean = false;
-  tintColor: string = '#108ee9';
-  unselectedTintColor: string = '#888';
+  hidden = false;
+  topFlag = false;
+  tintColor = '#108ee9';
+  unselectedTintColor = '#888';
   tabbarStyle: object = { position: 'fixed', height: '100%', width: '100%', top: 0 };
-  selectedIndex: number = 0;
+  selectedIndex = 0;
 
   constructor(private router: Router) {}
 
@@ -24,7 +24,7 @@ export class LayoutComponent {
   showNextTabBar(event) {
     event.preventDefault();
     const PANE_COUNT = 4;
-    if (this.selectedIndex == PANE_COUNT - 1) {
+    if (this.selectedIndex === PANE_COUNT - 1) {
       this.selectedIndex = 0;
     } else {
       this.selectedIndex++;
