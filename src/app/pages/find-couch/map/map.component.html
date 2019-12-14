@@ -1,8 +1,9 @@
-<div class="container-fluid map">
+<nz-spin *ngIf="loading" nzSimple [nzSize]="'large'"></nz-spin>
+<div *ngIf="!loading" class="container-fluid map">
   <p-gmap
+    [styleClass]="'couchMap'"
     [options]="options"
     [overlays]="overlays"
-    [style]="{ width: '100%', height: '80vh' }"
     (onOverlayClick)="handleOverlayClick($event)"
   ></p-gmap>
 </div>
