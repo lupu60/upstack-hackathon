@@ -1,15 +1,13 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { PagesRoutingModule } from './pages-routing.module';
-import { LayoutComponent } from './layout/layout.component';
-import { NgZorroAntdModule } from 'ng-zorro-antd';
+import { NgModule } from '@angular/core';
 import { NgZorroAntdMobileModule } from 'ng-zorro-antd-mobile';
 import { NzIconModule } from 'ng-zorro-antd/icon';
-import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { LayoutComponent } from './layout/layout.component';
+import { MessagesModule } from './messages/messages.module';
+import { PagesRoutingModule } from './pages-routing.module';
 
 @NgModule({
   declarations: [LayoutComponent],
-  imports: [NgZorroAntdMobileModule, NzIconModule, CommonModule, PagesRoutingModule]
+  imports: [NgZorroAntdMobileModule, NzIconModule, MessagesModule, CommonModule, PagesRoutingModule]
 })
 export class PagesModule {}

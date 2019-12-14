@@ -1,1 +1,29 @@
-<p>user-profile works!</p>
+<div style="padding:30px;">
+  <nz-card style="width: 300px;margin-top: 16px" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+    <nz-card-meta
+      [nzAvatar]="avatarTemplate"
+      nzTitle="Card title"
+      nzDescription="This is the description"
+    ></nz-card-meta>
+  </nz-card>
+
+  <ng-template #avatarTemplate>
+    <nz-avatar nzSrc="userProfilePicture"></nz-avatar>
+  </ng-template>
+
+  <ng-template #coverTemplate>
+    <img alt="example" src="https://picsum.photos/500/500/?blur" />
+  </ng-template>
+
+  <ng-template #actionSetting>
+    <i nz-icon nzType="setting"></i>
+  </ng-template>
+
+  <ng-template #actionEdit>
+    <i nz-icon nzType="edit"></i>
+  </ng-template>
+
+  <ng-template #actionEllipsis>
+    <i nz-icon nzType="ellipsis"></i>
+  </ng-template>
+</div>

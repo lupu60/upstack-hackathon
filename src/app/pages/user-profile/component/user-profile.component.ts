@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { generateAvatar } from '../../../shared/generateAvatar';
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserProfileComponent implements OnInit {
   constructor() {}
-
-  ngOnInit() {}
+  userProfilePicture;
+  ngOnInit() {
+    this.userProfilePicture = generateAvatar();
+  }
 }
