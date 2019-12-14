@@ -59,6 +59,7 @@
     "ng-zorro-antd": "8.5.2",
     "ng-zorro-antd-mobile": "1.0.2",
     "ngx-pipes": "^2.6.0",
+    "primeng": "9.0.0-rc.2",
     "rxjs": "~6.4.0",
     "tslib": "^1.10.0",
     "zone.js": "~0.9.1"
@@ -68,6 +69,7 @@
     "@angular/cli": "~8.3.18",
     "@angular/compiler-cli": "~8.2.13",
     "@angular/language-service": "~8.2.13",
+    "@types/googlemaps": "3.38.1",
     "@types/jasmine": "~3.3.8",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",

@@ -5,9 +5,10 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { LayoutComponent } from './layout/layout.component';
 import { NgZorroAntdModule } from 'ng-zorro-antd';
 import { NgZorroAntdMobileModule } from 'ng-zorro-antd-mobile';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @NgModule({
   declarations: [LayoutComponent],
-  imports: [NgZorroAntdModule, NgZorroAntdMobileModule, CommonModule, PagesRoutingModule]
+  imports: [NgZorroAntdMobileModule, NzIconModule, CommonModule, PagesRoutingModule]
 })
 export class PagesModule {}

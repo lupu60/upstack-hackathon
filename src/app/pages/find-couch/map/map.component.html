@@ -1,0 +1,8 @@
+<div class="container-fluid map">
+  <p-gmap
+    [options]="options"
+    [overlays]="overlays"
+    [style]="{ width: '100%', height: '80vh' }"
+    (onOverlayClick)="handleOverlayClick($event)"
+  ></p-gmap>
+</div>

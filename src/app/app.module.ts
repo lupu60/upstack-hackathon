@@ -8,7 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { Router, RouterModule } from '@angular/router';
 import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
-import { en_US, NgZorroAntdModule, NZ_I18N } from 'ng-zorro-antd';
+import { en_US, NZ_I18N } from 'ng-zorro-antd';
 import { NgZorroAntdMobileModule } from 'ng-zorro-antd-mobile';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,9 +34,7 @@ registerLocaleData(en);
     LoadingBarHttpClientModule,
 
     // ng zorro
-    NgZorroAntdMobileModule,
     IconsProviderModule,
-    NgZorroAntdModule,
 
     // app
     PagesModule
