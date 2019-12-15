@@ -5,6 +5,12 @@ export interface ApiResponse {
   data: any;
 }
 
+export interface SearchMapParam {
+  lat_1: number;
+  lng_1: number;
+  lat_2: number;
+  lng_2: number;
+}
 export interface User {
   id: number;
   created_at: string;

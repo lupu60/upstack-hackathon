@@ -7,10 +7,11 @@ import { NzSpinModule } from 'ng-zorro-antd';
 import { NgZorroAntdMobileModule } from 'ng-zorro-antd-mobile';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 import { ApiModule } from '../../../app/api/api.module';
+import { NzModalModule } from 'ng-zorro-antd/modal';
 
 @NgModule({
   declarations: [MapComponent],
-  imports: [CommonModule, NzMessageModule, NgZorroAntdMobileModule, NzSpinModule, GMapModule, ApiModule],
+  imports: [CommonModule, NzMessageModule, NzModalModule, NgZorroAntdMobileModule, NzSpinModule, GMapModule, ApiModule],
   exports: [MapComponent]
 })
 export class FindCouchModule {}

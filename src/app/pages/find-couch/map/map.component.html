@@ -15,5 +15,7 @@
     [overlays]="overlays"
     (onOverlayClick)="handleOverlayClick($event)"
     (onMapReady)="setMapInstance($event)"
+    (onMapClick)="mapClicked($event)"
+    (onOverlayClick)="userClicked($event)"
   ></p-gmap>
 </div>

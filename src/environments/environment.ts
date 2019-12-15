@@ -4,7 +4,6 @@
 
 export const environment = {
   production: false,
-  // baseUrl: 'http://localhost:5002/',
   baseUrl: 'https://api.redbird.games/',
   googleApiKey: 'AIzaSyDR_lxyGjDXQPq8mFA71nTMzBvgklwZnjE'
 };
