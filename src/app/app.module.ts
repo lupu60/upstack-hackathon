@@ -15,6 +15,8 @@ import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
 import { IconsProviderModule } from './shared/icons-provider.module';
 import { NzMessageModule } from 'ng-zorro-antd/message';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 registerLocaleData(en);
 
@@ -37,7 +39,8 @@ registerLocaleData(en);
     // ng zorro
     IconsProviderModule,
     // app
-    PagesModule
+    PagesModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }],
   bootstrap: [AppComponent]
