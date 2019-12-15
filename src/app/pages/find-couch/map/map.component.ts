@@ -4,6 +4,7 @@ import { NzMessageService } from 'ng-zorro-antd';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { RestMapService } from 'src/app/api/rest-map.service';
 
 declare var google;
 
@@ -21,7 +22,7 @@ export class MapComponent implements OnInit {
   addressesSearchUpdate = new Subject<string>();
   googleMapInstance: any;
 
-  constructor(private http: HttpClient, private notification: NzMessageService) {}
+  constructor(private http: HttpClient, private notification: NzMessageService, private mapApi: RestMapService) {}
 
   ngOnInit() {
     this.options = {
@@ -35,6 +36,10 @@ export class MapComponent implements OnInit {
         this.options.center.lat = position.coords.latitude;
         this.options.center.lng = position.coords.longitude;
         this.loading = false;
+
+        // this.mapApi.searchMap().subscribe(results => {
+        //   console.log(results);
+        // })
         this.initOverlays();
       });
     } else {

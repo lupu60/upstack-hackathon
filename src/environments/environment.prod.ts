@@ -1,4 +1,6 @@
 export const environment = {
   production: true,
-  googleApiKey: 'AIzaSyD7fF439KMzM9uT4cs_iPFLORjvFKSvK0k'
+  baseUrl: 'https://couchsurfer.ngrok.io/',
+  // baseUrl:'https://api.redbird.games/',
+  googleApiKey: 'AIzaSyDR_lxyGjDXQPq8mFA71nTMzBvgklwZnjE'
 };

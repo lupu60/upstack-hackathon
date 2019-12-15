@@ -18,10 +18,16 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NzGridModule } from 'ng-zorro-antd/grid';
+import { ApiModule } from '../api/api.module';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
 
 @NgModule({
   declarations: [LoginComponent, RegisterComponent],
   imports: [
+    NzCardModule,
+    NzUploadModule,
+    ApiModule,
     NzInputModule,
     NzGridModule,
     NzFormModule,

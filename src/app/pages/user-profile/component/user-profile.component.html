@@ -75,3 +75,81 @@
     <i nz-icon nzType="ellipsis"></i>
   </ng-template>
 </div>
+<!--
+<form nz-form class="register-form" [formGroup]="validateForm" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-control nzErrorTip="The input is not valid E-mail!">
+      <nz-input-group nzPrefixIcon="user">
+        <input type="text" nz-input formControlName="userName" placeholder="Email" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your Password!">
+      <nz-input-group nzPrefixIcon="lock">
+        <input
+          type="password"
+          nz-input
+          formControlName="password"
+          (ngModelChange)="updateConfirmValidator()"
+          placeholder="Password"
+        />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control [nzErrorTip]="errorTpl">
+      <nz-input-group nzPrefixIcon="lock">
+        <input type="password" nz-input formControlName="checkPassword" placeholder="Confirm Password" />
+        <ng-template #errorTpl let-control>
+          <ng-container *ngIf="control.hasError('required')">
+            Please confirm your password!
+          </ng-container>
+          <ng-container *ngIf="control.hasError('confirm')">
+            Two passwords that you enter is inconsistent!
+          </ng-container>
+        </ng-template>
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your city!">
+      <nz-input-group nzPrefixIcon="home">
+        <input type="text" nz-input formControlName="city" placeholder="City" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your country!">
+      <nz-input-group nzPrefixIcon="home">
+        <input type="text" nz-input formControlName="country" placeholder="Country" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-control nzErrorTip="Please input your Postal Code!">
+      <nz-input-group nzPrefixIcon="home">
+        <input type="text" nz-input formControlName="postal_code" placeholder="Postal Code" />
+      </nz-input-group>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <label for="file">Choose Avatar</label>
+    <input type="file"
+           id="file"
+           (change)="handleFileInput($event.target.files)">
+  </nz-form-item>
+
+  <nz-form-item nz-row class="register-area">
+    <nz-form-control>
+      <button nz-button class="login-form-button" [nzType]="'primary'">Register</button>
+      <a routerLink="/auth/login">Login</a>
+    </nz-form-control>
+  </nz-form-item>
+</form> -->

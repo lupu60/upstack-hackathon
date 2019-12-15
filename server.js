@@ -4,6 +4,7 @@ const app = express();
 
 // Serve only the static files form the dist directory
 app.use('/', express.static(__dirname + '/dist/couch-surfing'));
+app.use('/web', express.static(__dirname + '/dist/couch-surfing'));
 app.use('/documentation', express.static(__dirname + '/documentation'));
 
 // Start the app by listening on the default Heroku port

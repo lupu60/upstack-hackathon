@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { RestAuthenticationService } from 'src/app/api/rest-authentication.service';
+import { ApiResponse, User } from 'src/app/shared/api.dto';
 
 @Component({
   selector: 'app-register',
@@ -8,12 +10,27 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 })
 export class RegisterComponent implements OnInit {
   validateForm: FormGroup;
+  fileToUpload;
+
+  constructor(private fb: FormBuilder, private restApi: RestAuthenticationService) {}
+
+  ngOnInit(): void {
+    this.validateForm = this.fb.group({
+      name: [null, [Validators.email, Validators.required]],
+      password: [null, [Validators.required]],
+      email: [null, [Validators.email, Validators.required]],
+      checkPassword: [null, [Validators.required, this.confirmationValidator]]
+    });
+  }
 
   submitForm(): void {
     // tslint:disable-next-line: forin
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
+    }
+    if (this.validateForm.valid) {
+      this.restApi.register(this.validateForm.value);
     }
   }
 
@@ -30,24 +47,4 @@ export class RegisterComponent implements OnInit {
     }
     return {};
   };
-
-  getCaptcha(e: MouseEvent): void {
-    e.preventDefault();
-  }
-
-  constructor(private fb: FormBuilder) {}
-
-  ngOnInit(): void {
-    this.validateForm = this.fb.group({
-      email: [null, [Validators.email, Validators.required]],
-      password: [null, [Validators.required]],
-      checkPassword: [null, [Validators.required, this.confirmationValidator]],
-      nickname: [null, [Validators.required]],
-      phoneNumberPrefix: ['+86'],
-      phoneNumber: [null, [Validators.required]],
-      website: [null, [Validators.required]],
-      captcha: [null, [Validators.required]],
-      agree: [false]
-    });
-  }
 }
