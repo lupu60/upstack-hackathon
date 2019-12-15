@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { NzMessageService } from 'ng-zorro-antd';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
@@ -12,16 +13,15 @@ declare var google;
   styleUrls: ['./map.component.scss']
 })
 export class MapComponent implements OnInit {
+  loading = true;
   options: any;
   position;
   infoWindow: any;
   overlays: any[] = [];
-  loading = true;
   addressesSearchUpdate = new Subject<string>();
-
   googleMapInstance: any;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private notification: NzMessageService) {}
 
   ngOnInit() {
     this.options = {
@@ -38,6 +38,7 @@ export class MapComponent implements OnInit {
         this.initOverlays();
       });
     } else {
+      this.notification.create(`error`, `Could not use device position`);
     }
 
     this.infoWindow = new google.maps.InfoWindow();

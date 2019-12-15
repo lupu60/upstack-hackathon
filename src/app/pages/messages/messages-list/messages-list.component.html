@@ -1,0 +1,18 @@
+<div nz-row nzType="flex" nzJustify="center" nzAlign="top" style="padding:30px">
+  <nz-list [nzDataSource]="data" [nzRenderItem]="item" [nzItemLayout]="'horizontal'" [nzLoading]="loading">
+    <ng-template #item let-item>
+      <nz-list-item>
+        <nz-list-item-meta
+          [nzTitle]="nzTitle"
+          nzAvatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
+        >
+          <ng-template #nzTitle>
+            <a href="https://ng.ant.design">{{ item.title }}</a>
+          </ng-template>
+        </nz-list-item-meta>
+      </nz-list-item>
+    </ng-template>
+  </nz-list>
+</div>
+
+<app-chat-box></app-chat-box>

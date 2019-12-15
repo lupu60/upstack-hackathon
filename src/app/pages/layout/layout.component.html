@@ -15,11 +15,9 @@
     <ng-template #icon11>
       <i nz-icon nzType="search" style="font-size: 24px;" nzTheme="outline"></i>
     </ng-template>
-    <div style="background: #ECECEC; height: 100%; text-align: center">
-      <ng-container>
-        <app-map></app-map>
-      </ng-container>
-    </div>
+    <ng-container>
+      <app-map></app-map>
+    </ng-container>
   </TabBarItem>
   <TabBarItem [title]="'Messages'" [key]="'web/messages'" [icon]="icon3" [selectedIcon]="icon33" [dot]="true">
     <ng-template #icon3>
@@ -28,11 +26,9 @@
     <ng-template #icon33>
       <i nz-icon nzType="message" style="font-size: 24px;" nzTheme="outline"></i>
     </ng-template>
-    <div style="background: #ECECEC; height: 100%;">
-      <ng-container>
-        <app-messages-list></app-messages-list>
-      </ng-container>
-    </div>
+    <ng-container>
+      <app-messages-list></app-messages-list>
+    </ng-container>
   </TabBarItem>
   <TabBarItem [title]="'My Profile'" [key]="'web/user-profile'" [icon]="icon4" [selectedIcon]="icon44">
     <ng-template #icon4>
@@ -41,10 +37,8 @@
     <ng-template #icon44>
       <i nz-icon nzType="user" style="font-size: 24px;" nzTheme="outline"></i>
     </ng-template>
-    <div style="background: #ECECEC; height: 100%;">
-      <ng-container>
-        <app-user-profile></app-user-profile>
-      </ng-container>
-    </div>
+    <ng-container>
+      <app-user-profile></app-user-profile>
+    </ng-container>
   </TabBarItem>
 </TabBar>
