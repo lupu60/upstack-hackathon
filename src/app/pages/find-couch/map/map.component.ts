@@ -1,4 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+
 declare var google;
 
 @Component({
@@ -12,8 +17,11 @@ export class MapComponent implements OnInit {
   infoWindow: any;
   overlays: any[] = [];
   loading = true;
+  addressesSearchUpdate = new Subject<string>();
 
-  constructor() {}
+  googleMapInstance: any;
+
+  constructor(private http: HttpClient) {}
 
   ngOnInit() {
     this.options = {
@@ -33,6 +41,20 @@ export class MapComponent implements OnInit {
     }
 
     this.infoWindow = new google.maps.InfoWindow();
+
+    this.addressesSearchUpdate.pipe(debounceTime(500), distinctUntilChanged()).subscribe(value => {
+      if (value) {
+        this.http
+          .get(`https://maps.googleapis.com/maps/api/geocode/json?address=${value}&key=${environment.googleApiKey}`)
+          .subscribe((googleResponse: any) => {
+            const { results } = googleResponse;
+            const [firstResponse] = results;
+            const { geometry } = firstResponse;
+            const { location } = geometry;
+            this.googleMapInstance.setCenter({ lat: location.lat, lng: location.lng });
+          });
+      }
+    });
   }
 
   initOverlays() {
@@ -66,5 +88,9 @@ export class MapComponent implements OnInit {
       this.infoWindow.open(event.map, event.overlay);
       event.map.setCenter(event.overlay.getPosition());
     }
+  }
+
+  setMapInstance(event) {
+    this.googleMapInstance = event.map;
   }
 }

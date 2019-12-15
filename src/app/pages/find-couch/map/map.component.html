@@ -1,9 +1,19 @@
 <nz-spin *ngIf="loading" nzSimple [nzSize]="'large'"></nz-spin>
 <div *ngIf="!loading" class="container-fluid map">
+  <div class="searchBar">
+    <InputItem
+      (onChange)="this.addressesSearchUpdate.next($event)"
+      type="text"
+      [clear]="true"
+      [placeholder]="'search an address'"
+    ></InputItem>
+  </div>
   <p-gmap
+    #gmap
     [styleClass]="'couchMap'"
     [options]="options"
     [overlays]="overlays"
     (onOverlayClick)="handleOverlayClick($event)"
+    (onMapReady)="setMapInstance($event)"
   ></p-gmap>
 </div>

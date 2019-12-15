@@ -7,6 +7,7 @@ import { MessagesModule } from './messages/messages.module';
 import { PagesRoutingModule } from './pages-routing.module';
 import { FindCouchModule } from './find-couch/find-couch.module';
 import { UserProfileModule } from './user-profile/user-profile.module';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [LayoutComponent],
   imports: [
@@ -17,7 +18,8 @@ import { UserProfileModule } from './user-profile/user-profile.module';
     PagesRoutingModule,
     FindCouchModule,
     UserProfileModule,
-    MessagesModule
+    MessagesModule,
+    HttpClientModule
   ]
 })
 export class PagesModule {}
