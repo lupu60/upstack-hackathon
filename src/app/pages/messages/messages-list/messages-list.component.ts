@@ -9,6 +9,7 @@ import { BehaviorSubject, Observable, Subscription } from 'rxjs';
   styleUrls: ['./messages-list.component.scss']
 })
 export class MessagesListComponent implements OnInit {
+  loading;
   data = [
     {
       title: 'Ant Design Title 1'
