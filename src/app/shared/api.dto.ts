@@ -38,3 +38,22 @@ export interface Locations {
   status: number;
   surfable: number;
 }
+
+export interface MessageList {
+  uid: string;
+  first_name: string;
+  last_name: string;
+  avatar: string;
+  total: number;
+  new_messages: boolean;
+}
+
+export interface ChatRoomItem {
+  uid: string;
+  first_name: string;
+  last_name: string;
+  avatar: string;
+  myself: boolean;
+  timestamp: number;
+  body: string;
+}

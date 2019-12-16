@@ -16,10 +16,10 @@
       <i nz-icon nzType="search" style="font-size: 24px;" nzTheme="outline"></i>
     </ng-template>
     <ng-container>
-      <app-map></app-map>
+      <app-map (chatSelected)="selectedIndex = 1"></app-map>
     </ng-container>
   </TabBarItem>
-  <TabBarItem [title]="'Messages'" [key]="'web/messages'" [icon]="icon3" [selectedIcon]="icon33" [dot]="true">
+  <TabBarItem [title]="'Messages'" [key]="'web/messages'" [icon]="icon3" [selectedIcon]="icon33">
     <ng-template #icon3>
       <i nz-icon nzType="message" style="font-size: 24px;" nzTheme="outline"></i>
     </ng-template>

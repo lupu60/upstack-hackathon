@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { NzMessageService, NzModalService } from 'ng-zorro-antd';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { NzMessageService, NzModalService, NzModalRef } from 'ng-zorro-antd';
 import { Subject } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { RestMapService } from 'src/app/api/rest-map.service';
 import { SearchMapParam, ApiResponse, User } from 'src/app/shared/api.dto';
+import { RestMessages } from 'src/app/api/rest-messeges.service';
 
 declare var google;
 
@@ -19,21 +20,26 @@ export class MapComponent implements OnInit {
   options: any;
   position;
   infoWindow: any;
-  overlays: any[] = [];
+  overlays = [];
   addressesSearchUpdate = new Subject<string>();
   googleMapInstance: any;
+
+  @Output()
+  chatSelected = new EventEmitter();
 
   constructor(
     private http: HttpClient,
     private notification: NzMessageService,
     private mapApi: RestMapService,
-    private modalService: NzModalService
+    private modalService: NzModalService,
+    private restMessages: RestMessages
   ) {}
 
   ngOnInit() {
     this.options = {
       center: { lat: 0, lng: 0 },
-      zoom: 1
+      zoom: 15,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
@@ -52,6 +58,10 @@ export class MapComponent implements OnInit {
         this.goToAddress(value);
       }
     });
+
+    //   google.maps.event.addListener(map, 'bounds_changed', function() {
+    //     alert(map.getBounds());
+    //  });
   }
 
   goToAddress(queryAddress) {
@@ -63,13 +73,6 @@ export class MapComponent implements OnInit {
         const { geometry } = firstResponse;
         const { location } = geometry;
         this.googleMapInstance.setCenter({ lat: location.lat, lng: location.lng });
-        this.overlays.push(
-          new google.maps.Marker({
-            position: { lat: location.lat, lng: location.lng },
-            title: firstResponse.address_components[0].short_name,
-            animation: google.maps.Animation.DROP
-          })
-        );
         const bounds = {
           lat_1: geometry.bounds.northeast.lat,
           lng_1: geometry.bounds.northeast.lng,
@@ -125,16 +128,31 @@ export class MapComponent implements OnInit {
 
   setMapInstance(event) {
     this.googleMapInstance = event.map;
-    this.searchCouches(this.getBoundsFromLatLng(this.options.center.lat, this.options.center.lng));
+    const bounds = new google.maps.LatLngBounds();
+    bounds.extend(this.overlays[0].getPosition());
+    const searchBounds: SearchMapParam = {
+      lat_1: bounds.pa.g,
+      lng_1: bounds.pa.h,
+      lat_2: bounds.ka.g,
+      lng_2: bounds.ka.h
+    };
+    this.searchCouches(searchBounds);
   }
 
   mapClicked(event) {
-    this.searchCouches(this.getBoundsFromLatLng(event.latLng.lat(), event.latLng.lng()));
+    // const mapBounds = this.googleMapInstance.getBounds();
+    // const bounds: SearchMapParam = {
+    //   lat_1: mapBounds.pa.g,
+    //   lng_1: mapBounds.pa.h,
+    //   lat_2: mapBounds.ka.g,
+    //   lng_2: mapBounds.ka.h
+    // };
+    // this.searchCouches(bounds);
   }
 
   userClicked(event) {
     const selectedUser: User = event.overlay.user;
-    this.modalService.create({
+    const modal: NzModalRef = this.modalService.create({
       nzTitle: `${selectedUser.first_name} ${selectedUser.last_name}`,
       nzWidth: 300,
       nzBodyStyle: {
@@ -150,38 +168,46 @@ export class MapComponent implements OnInit {
         selectedUser.locations.longitude
       )}" target="_blank"> Get Direction</a>
         <br>
-        <a routerLink="messages">Chat with the user </a>
         </div>
       `,
       nzClosable: true,
-      nzFooter: []
+      nzFooter: [
+        {
+          label: 'Close',
+          shape: 'default',
+          onClick: () => modal.destroy()
+        },
+        {
+          label: 'Chat with',
+          type: 'primary',
+          onClick: () => {
+            modal.destroy();
+            this.sendMessage(selectedUser);
+          }
+        }
+      ]
     });
   }
 
+  sendMessage(value) {
+    this.restMessages.sendMessage({ uid: value.uid, body: `Hey!` }).subscribe();
+    this.chatSelected.emit(value);
+  }
+
   searchCouches(bounds: SearchMapParam) {
-    const image = {
-      url: 'https://couch-surfing.herokuapp.com/assets/brand-logo.png',
-      // This marker is 20 pixels wide by 32 pixels high.
-      size: new google.maps.Size(64, 64),
-      // The origin for this image is (0, 0).
-      origin: new google.maps.Point(0, 0),
-      // The anchor for this image is the base of the flagpole at (0, 32).
-      anchor: new google.maps.Point(32, 64)
-    };
-    // bounds = { "lat_1": 54.229951, "lng_1": -125.506423, "lat_2": 30.236522, "lng_2": -64.50038 };
     this.mapApi.searchMap(bounds).subscribe((results: ApiResponse) => {
       const userLocation: [] = results.data;
       if (userLocation.length > 0) {
-        userLocation.forEach((element: User) => {
+        const newMarkers = userLocation.forEach((user: User) =>
           this.overlays.push(
             new google.maps.Marker({
-              position: { lat: Number(element.locations.latitude), lng: Number(element.locations.longitude) },
-              title: `${element.first_name} ${element.last_name}`,
+              position: { lat: Number(user.locations.latitude), lng: Number(user.locations.longitude) },
+              title: `${user.first_name} ${user.last_name}`,
               animation: google.maps.Animation.DROP,
-              user: element
+              user
             })
-          );
-        });
+          )
+        );
       }
     });
   }
