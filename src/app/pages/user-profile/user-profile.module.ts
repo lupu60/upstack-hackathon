@@ -19,6 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzInputModule } from 'ng-zorro-antd';
+import { ApiModule } from 'src/app/api/api.module';
 @NgModule({
   declarations: [UserProfileComponent],
   imports: [
@@ -43,7 +44,9 @@ import { NzInputModule } from 'ng-zorro-antd';
     CommonModule,
     FormsModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule,
+    ApiModule
   ],
   exports: [UserProfileComponent]
 })

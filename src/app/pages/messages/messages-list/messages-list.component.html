@@ -3,7 +3,7 @@
   <div *ngIf="hideChatBox" nz-row nzType="flex" nzJustify="center" nzAlign="top" style="padding:30px">
     <nz-list [nzDataSource]="messagesList" [nzRenderItem]="item" [nzItemLayout]="'horizontal'" [nzLoading]="loading">
       <ng-template #item let-item>
-        <nz-list-item>
+        <nz-list-item style="border-bottom: 1px solid #0f48c4;">
           <nz-list-item-meta [nzTitle]="nzTitle" nzAvatar="{{ item.avatar }}" [nzDescription]="nzDescription">
             <ng-template #nzTitle>
               <nz-badge [nzDot]="true" [nzOffset]="[5, 0]" [nzShowDot]="item.new_messages">
@@ -25,9 +25,7 @@
       <nz-breadcrumb-item>
         <a (click)="hideChatBox = true">back</a>
       </nz-breadcrumb-item>
-      <nz-breadcrumb-item>
-        {{ currentChat.title }}
-      </nz-breadcrumb-item>
+      <nz-breadcrumb-item> {{ currentChat.first_name }} {{ currentChat.last_name }} </nz-breadcrumb-item>
     </nz-breadcrumb>
     <cdk-virtual-scroll-viewport itemSize="73" class="demo-infinite-container">
       <nz-list [nzDataSource]="chatHistory" [nzRenderItem]="item" [nzItemLayout]="'horizontal'" [nzLoading]="loading">

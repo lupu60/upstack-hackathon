@@ -38,7 +38,7 @@ export class MapComponent implements OnInit {
   ngOnInit() {
     this.options = {
       center: { lat: 0, lng: 0 },
-      zoom: 15,
+      zoom: 10,
       mapTypeId: google.maps.MapTypeId.ROADMAP
     };
     if (navigator.geolocation) {
@@ -58,10 +58,6 @@ export class MapComponent implements OnInit {
         this.goToAddress(value);
       }
     });
-
-    //   google.maps.event.addListener(map, 'bounds_changed', function() {
-    //     alert(map.getBounds());
-    //  });
   }
 
   goToAddress(queryAddress) {
@@ -81,16 +77,6 @@ export class MapComponent implements OnInit {
         };
         this.searchCouches(bounds);
       });
-  }
-
-  getBoundsFromLatLng(lat, lng) {
-    const bounds = {
-      lat_2: lat - 0.009 * 100,
-      lng_2: lng + 0.009 * 100,
-      lat_1: lat - 0.009 * 100,
-      lng_1: lng + 0.009 * 100
-    };
-    return bounds;
   }
 
   initOverlays() {
@@ -130,13 +116,32 @@ export class MapComponent implements OnInit {
     this.googleMapInstance = event.map;
     const bounds = new google.maps.LatLngBounds();
     bounds.extend(this.overlays[0].getPosition());
+
+    // {
+    //   lat_1: 45.72210200000001
+    // lng_1: 25.6784767
+    // lat_2: 45.5828542
+    //   lng_2: 25.5144489
+    // }
+
     const searchBounds: SearchMapParam = {
-      lat_1: bounds.pa.g,
-      lng_1: bounds.pa.h,
-      lat_2: bounds.ka.g,
-      lng_2: bounds.ka.h
+      lat_1: bounds.pa.h,
+      lng_1: bounds.pa.g,
+      lat_2: bounds.ka.h,
+      lng_2: bounds.ka.g
     };
     this.searchCouches(searchBounds);
+  }
+
+  onZoomChanged(event) {
+    // const mapBounds = this.googleMapInstance.getBounds();
+    // const bounds: SearchMapParam = {
+    //   lat_1: mapBounds.pa.g,
+    //   lng_1: mapBounds.pa.h,
+    //   lat_2: mapBounds.ka.g,
+    //   lng_2: mapBounds.ka.h
+    // };
+    // this.searchCouches(bounds);
   }
 
   mapClicked(event) {
@@ -178,7 +183,7 @@ export class MapComponent implements OnInit {
           onClick: () => modal.destroy()
         },
         {
-          label: 'Chat with',
+          label: `Chat with ${selectedUser.first_name}`,
           type: 'primary',
           onClick: () => {
             modal.destroy();
@@ -198,7 +203,8 @@ export class MapComponent implements OnInit {
     this.mapApi.searchMap(bounds).subscribe((results: ApiResponse) => {
       const userLocation: [] = results.data;
       if (userLocation.length > 0) {
-        const newMarkers = userLocation.forEach((user: User) =>
+        this.overlays = [this.overlays[0]];
+        const newMarkers = userLocation.forEach((user: User) => {
           this.overlays.push(
             new google.maps.Marker({
               position: { lat: Number(user.locations.latitude), lng: Number(user.locations.longitude) },
@@ -206,8 +212,8 @@ export class MapComponent implements OnInit {
               animation: google.maps.Animation.DROP,
               user
             })
-          )
-        );
+          );
+        });
       }
     });
   }

@@ -1,11 +1,13 @@
 {
-  "name": "couch-surfing",
-  "short_name": "couch-surfing",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
-  "display": "standalone",
-  "scope": "/",
+  "name": "Couch Surf",
+  "short_name": "Couch Surf",
+  "theme_color": "#2196f3",
+  "background_color": "#2196f3",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "Scope": "/",
   "start_url": "/",
+  "splash_pages": null,
   "icons": [
     {
       "src": "assets/icons/icon-72x72.png",

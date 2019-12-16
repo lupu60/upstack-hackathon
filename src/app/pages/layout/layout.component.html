@@ -16,7 +16,7 @@
       <i nz-icon nzType="search" style="font-size: 24px;" nzTheme="outline"></i>
     </ng-template>
     <ng-container>
-      <app-map (chatSelected)="selectedIndex = 1"></app-map>
+      <app-map (chatSelected)="chatSelectedFromMap($event)"></app-map>
     </ng-container>
   </TabBarItem>
   <TabBarItem [title]="'Messages'" [key]="'web/messages'" [icon]="icon3" [selectedIcon]="icon33">
@@ -27,7 +27,7 @@
       <i nz-icon nzType="message" style="font-size: 24px;" nzTheme="outline"></i>
     </ng-template>
     <ng-container>
-      <app-messages-list></app-messages-list>
+      <app-messages-list [selectedUserFromMap]="selectedChatUser"></app-messages-list>
     </ng-container>
   </TabBarItem>
   <TabBarItem [title]="'My Profile'" [key]="'web/user-profile'" [icon]="icon4" [selectedIcon]="icon44">

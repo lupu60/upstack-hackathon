@@ -8,9 +8,11 @@ import { PagesRoutingModule } from './pages-routing.module';
 import { FindCouchModule } from './find-couch/find-couch.module';
 import { UserProfileModule } from './user-profile/user-profile.module';
 import { HttpClientModule } from '@angular/common/http';
+import { ApiModule } from '../api/api.module';
 @NgModule({
   declarations: [LayoutComponent],
   imports: [
+    ApiModule,
     NgZorroAntdMobileModule,
     NzIconModule,
     MessagesModule,

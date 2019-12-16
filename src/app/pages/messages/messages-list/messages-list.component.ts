@@ -1,7 +1,4 @@
-import { CollectionViewer } from '@angular/cdk/collections';
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 import { RestMessages } from 'src/app/api/rest-messeges.service';
 import { ApiResponse, MessageList } from 'src/app/shared/api.dto';
 
@@ -10,7 +7,7 @@ import { ApiResponse, MessageList } from 'src/app/shared/api.dto';
   templateUrl: './messages-list.component.html',
   styleUrls: ['./messages-list.component.scss']
 })
-export class MessagesListComponent implements OnInit {
+export class MessagesListComponent implements OnInit, OnChanges {
   loading = true;
   hideChatBox = true;
   messagesList;
@@ -19,12 +16,23 @@ export class MessagesListComponent implements OnInit {
   @Output()
   newMessages = new EventEmitter();
 
+  @Input()
+  selectedUserFromMap;
+
   constructor(private restMessages: RestMessages) {}
+
   ngOnInit(): void {
     this.fetchMessages();
     setInterval(() => {
       this.fetchMessages();
     }, 20000);
+  }
+
+  ngOnChanges(): void {
+    if (this.selectedUserFromMap) {
+      this.selectedUserFromMap.uuid = this.selectedUserFromMap.uid;
+      this.openChatroom('', this.selectedUserFromMap);
+    }
   }
 
   fetchMessages() {
@@ -38,6 +46,8 @@ export class MessagesListComponent implements OnInit {
         }
         return {
           title: `${message.first_name} ${message.last_name}`,
+          first_name: message.first_name,
+          last_name: message.last_name,
           total: message.total,
           new_messages: message.new_messages,
           avatar: message.avatar,
