@@ -7,7 +7,7 @@
           <nz-list-item-meta [nzTitle]="nzTitle" nzAvatar="{{ item.avatar }}" [nzDescription]="nzDescription">
             <ng-template #nzTitle>
               <nz-badge [nzDot]="true" [nzOffset]="[5, 0]" [nzShowDot]="item.new_messages">
-                <a (click)="openChatroom(item$event, item)">{{ item.title }}</a>
+                <a (click)="openChatroom($event, item)">{{ item.title }}</a>
               </nz-badge>
             </ng-template>
             <ng-template #nzDescription>
